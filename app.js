@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
+const db = require('./models/index');
 
 const app = express();
 const port = 8000;
@@ -14,6 +15,14 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
-});
+db.sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
