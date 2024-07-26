@@ -1,16 +1,19 @@
-/* eslint-disable no-undef */
 const { Sequelize } = require('sequelize');
+const config = require('./config')
 require('dotenv').config();
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    dialect: 'mysql',
-  }
-);
+const sequelize = new Sequelize({
+  dialect: 'mysql',
+  database: config.database,
+  username: config.username,
+  password: config.password,
+  host: config.host,
+  port: config.port,
+  logging: false,
+});
+
+sequelize.sync({
+  alter: true,
+});
 
 module.exports = sequelize;

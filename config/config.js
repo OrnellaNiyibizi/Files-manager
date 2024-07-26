@@ -1,6 +1,8 @@
-/* eslint-disable no-undef */
 require('dotenv').config();
-module.exports = {
+
+const nodeEnv = process.env.NODE_ENV || 'development'
+
+const config = {
   development: {
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
@@ -26,3 +28,5 @@ module.exports = {
     dialect: 'mysql',
   },
 };
+
+module.exports = config[nodeEnv]
