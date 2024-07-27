@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
 require('dotenv').config()
+const i18n = require('../i18n/i18n')
 
 const hash = async (password) => {
     return await bcrypt.hash(password, 10)
@@ -20,7 +21,7 @@ exports.signUp = async(req,res) => {
 
     const user = await User.findOne({where:{username: formData.username}})
     if(user){
-        return res.status(409).json({msg: "Username already in use"})
+        return res.status(409).json({msg: i18n.__('signup409')})
     }
     
     try{
@@ -30,14 +31,14 @@ exports.signUp = async(req,res) => {
             password: await hash(formData.password)
         });
       
-        return res.status(201).json({msg: "Signup successful!", data:{
+        return res.status(201).json({msg: i18n.__('signup201'), data:{
             id: newUser.id,
             fullName: newUser.fullName,
             username: newUser.username
         }})
     }catch(err){
         console.log(err)
-        return res.status(500).json({ message: 'Internal server error' });
+        return res.status(500).json({ message: i18n.__('error') });
     }
 }
 
@@ -50,15 +51,15 @@ exports.login = async(req,res) => {
             const passwordMatch = await bcrypt.compare(formData.password, user.password);
             if(passwordMatch){
                 const token = await jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-                return res.status(200).json({msg: "Login successful", token: token})
+                return res.status(200).json({msg: i18n.__('login200'), token: token})
             }else{
-                return res.status(401).json({msg: "Incorrect password"})
+                return res.status(401).json({msg: i18n.__('login401')})
             }
         }else{
-            return res.status(404).json({msg: "Account not found"})
+            return res.status(404).json({msg: i18n.__('login404')})
         }
     }catch(err){
         console.log(err.message)
-        return res.status(500).json({ msg: 'Internal server error' });
+        return res.status(500).json({ msg: i18n.__('error') });
     } 
 }

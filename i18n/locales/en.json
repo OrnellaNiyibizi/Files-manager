@@ -1,0 +1,14 @@
+{
+    "login200": "Login successful",
+    "login401": "Incorrect password",
+    "login404": "Account not found",
+    "signup201": "Signup successful",
+    "signup409": "Username already in use",
+    "error": "An unexpected error occured",
+    "upload201": "File added to queue", 
+    "deleteAll200": "All files successfully deleted",
+    "deleteAll404": "Files not found",
+    "deleteOne404": "File not found",
+    "update200": "File successfully updated",
+    "update404": "File not found"
+}

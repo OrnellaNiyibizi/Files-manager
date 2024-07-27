@@ -1,0 +1,15 @@
+{
+    "login200": "Connexion réussie",
+    "login401": "Mot de passe incorrect",
+    "login404": "Compte non trouvé",
+    "signup201": "Inscription réussie",
+    "signup409": "Nom d'utilisateur déjà utilisé",
+    "error": "Une erreur inattendue s'est produite",
+    "upload201": "Fichier ajouté à la file d'attente",
+    "deleteAll200": "Tous les fichiers ont été supprimés avec succès",
+    "deleteAll404": "Fichiers non trouvés",
+    "deleteOne404": "Fichier non trouvé",
+    "update200": "Fichier mis à jour avec succès",
+    "update404": "Fichier non trouvé"
+  }
+  

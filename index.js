@@ -1,6 +1,7 @@
 const sequelize = require('./config/database');
 const port = 8000;
 const app = require('./app')
+require('./redis/worker')
 
 sequelize
   .authenticate()
